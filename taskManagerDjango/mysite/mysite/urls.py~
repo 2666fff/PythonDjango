@@ -1,0 +1,49 @@
+from django.conf.urls import patterns, include, url
+from todo import views
+
+# Uncomment the next two lines to enable the admin:
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    # Examples:
+    # url(r'^$', 'mysite.views.home', name='home'),
+    # url(r'^mysite/', include('mysite.foo.urls')),
+    url(r'^home/',views.home,name='home'),
+    url(r'^tower/',views.tower,name='tower'),
+    url(r'^shop/',views.shop,name='shop'),
+    #=============
+    url(r'^task/', views.addtask,name='addtask'),
+    url(r'^delete1-(?P<id>\d+)/$', 'todo.views.deletetaskComp',name="task_delete1"),
+    url(r'^delete2-(?P<id>\d+)/$', 'todo.views.deletetaskExp',name="task_delete2"),
+    url(r'^delete-(?P<id>\d+)/$', 'todo.views.deletetask',name="task_delete"),
+    url(r'^complete-(?P<id>\d+)/$', 'todo.views.completetask',name="task_complete"),
+    url(r'^completed/',views.completed,name='completed'),
+    url(r'^expired/',views.expired,name='expired'),
+    
+    #===========group====================
+    url(r'^group/',views.group,name='group'),
+    url(r'^group=(?P<id>\d+)/$', 'todo.views.checkgroup',name="checkgroup"),
+    url(r'^group1=(?P<id>\d+)/$', 'todo.views.quitgroup',name="quitgroup"),
+    url(r'^group2=(?P<id>\d+)/$', 'todo.views.joingroup',name="joingroup"),
+    url(r'^group3=(?P<gid>\d+)/(?P<mid>\d+)/$', 'todo.views.kickmember',name="kickmember"),
+    url(r'^grouplist/', 'todo.views.grouplist',name="grouplist"),
+    #=======================================
+    
+    #===========message====================
+    url(r'^message/',views.message,name='message'),
+    url(r'^message=(?P<id>\d+)/$', 'todo.views.acceptinvite',name="acceptinvite"),
+    url(r'^message1=(?P<id>\d+)/$', 'todo.views.accepttaskcomplete',name="accepttaskcomplete"),
+    url(r'^message2=(?P<id>\d+)/$', 'todo.views.delmessage',name="delmessage"),
+    #======================================
+    
+
+    url(r'^register/',views.register,name='register'),
+    url(r'^logout/','django.contrib.auth.views.logout',{'next_page': '/login/'}),
+    url(r'^login/', 'django.contrib.auth.views.login',{'template_name': 'login.html'}),
+    # Uncomment the admin/doc line below to enable admin documentation:
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+
+    # Uncomment the next line to enable the admin:
+    url(r'^admin/', include(admin.site.urls)),
+)

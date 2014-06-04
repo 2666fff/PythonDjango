@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Doubtless 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130428
+
+-->
+{% load staticfiles%}
+<script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
+<script type='text/javascript' src='{{STATIC_URL}}script.js'></script>
+<script type="text/javascript" src="{{STATIC_URL}}jquery.noty.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}layouts/center.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}layouts/bottom.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}themes/default.js"></script>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Archivo+Narrow:400,700" rel="stylesheet" type="text/css">
+<link href="{%static "home.css"%}" rel="stylesheet" type="text/css" media="all" />
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body>
+{%if errdate == 4%}
+<script>GroupCreate();</script>
+{%endif%}
+{%if req == 2 and errdate == 0%}
+<script>RequestSent();</script>
+{%elif req == 1 and errdate == 0%}
+<script>Add();</script>
+{%endif%}
+<div id="logininfo">
+		{% if user.is_authenticated %}
+		<h2><p>Welcome, {{ user.username }}</p></h2>
+		{%endif%}
+		<form action="/logout/" method = "post">
+		{% csrf_token %}
+		<input type="submit" value="Logout"/>
+</form>
+</div>
+<div id="logo" class="container">
+	<h1><a>Task Manager</a></h1>
+</div>
+<div id="menu-wrapper">
+	<div id="menu" class="container">
+		<ul>
+			<li><a href="/home/">Home</a></li>
+			<li><a href="/task/">Tasks</a></li>
+			<li  ><a href="/tower/">Tower</a></li>
+			<li class="current_page_item"><a href="/group/">Group</a></li>
+			<li><a href="/message/">Inbox</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="page" class="container">
+<div id="box1">
+
+	<h3>
+	<ul class="style1"><li><a href="/grouplist/">View and Create Groups</a></li></ul></h3>
+	<br><br><br><br><br><br><br>
+	{%if gmember != None%}
+	<ul class="style1"><li><a href="/group/">Return</a></li></ul>
+	{%endif%}
+	</div>
+	
+	<div id="box2">
+	
+	{%if gmember != None%}
+	GROUP Tasks
+	{%if tform != None%}
+	<form action="{% url checkgroup group.id%}" method="POST">
+	{% csrf_token %}
+	{% for field in tform %}
+      	
+	{{ field.label_tag }}{{ field }}<br>
+	{{ field.errors }}
+      	
+	{% endfor %}
+	<input  name="action" type="submit" value="Add Task"/>
+	</form>
+	{%endif%}
+	{%if errdate == 1%}
+	<script>ErrorDate();</script>
+	{%endif%}
+	{%if errdate == 2%}
+	<script>GroupNoMember();</script>
+	{%endif%}
+	<table border="1"> 
+	<tr><td>Task added on:</td><td>Task Name</td><td>Due Date:</td><td>Assign to:</td><td>Delete</td><td>Task Status</td></tr>
+	{% for t in tasks %} 
+	<tr> 
+	{%if not t.expired%}
+	<td>{{t.time}}</td>
+	<td>{{t.task }}</td> 
+	<td>{{t.exp_time}}</td>
+	<td>{{t.assignto}}</td>
+	
+	{%if tform != None%}
+	<td><a href="{%url task_delete t.id%}" onclick="ConfirmationDelete()">Delete Task</a></td>
+	{%else%}
+	<td>No rights</td>
+	{%endif%}
+	{%if t.complete%}
+	<td>Completed</td>
+	{%else%}
+	<td><a href="{%url task_complete t.id%}" onclick="ConfirmSend()">Complete Task</a> </td>
+	{%endif%}
+	{% endif %}
+	</tr> 
+	{% endfor %} 
+	</table>
+	{%else%}
+	Groups you are in:
+	<table border="1"> 
+	<tr><td>ID</td><td>Name</td><td>Leader</td><td>Quit</td></tr>
+	{% for g in groups %} 
+	<tr> 
+	<td>{{g.id}}</td>
+	<td><a href="{%url checkgroup g.id%}">{{g.g_name}}</a></td>
+	<td>{{g.g_leader}}</td>
+	<td><a href="{%url quitgroup g.id%}" onclick="return confirm('Are you sure you want to leave?')">Quit</a></td>
+	</tr> 
+	{% endfor %} 
+	</table>
+	{%endif%}
+	</div>
+
+	<div id="box3">
+	<div style="clear: both;">&nbsp;</div>
+	<div class="entry">
+	{%if gmember != None%}
+	<h3>
+	Group Member
+	<table border="1"> 
+	<tr><td>Usernames</td></tr>
+	{% for gm in gmember %} 
+	<tr> 
+	<td>{{gm.g_member}}</td>
+	</tr>
+	{% endfor %} 
+	</table>
+	</h3>
+	<br><br>
+	{%if gmember != None%}
+	<form action="{% url checkgroup group.id %}" method="POST">
+	{% csrf_token %}
+	{% for field in iform %}
+      	
+	{{ field.label_tag }}<br>{{ field }}<br>
+	{{ field.errors }}
+      	
+	{% endfor %}
+	
+	<input name="action" type="submit" value="Invite User"/>
+	</form>
+	{%endif%}
+	{%endif%}
+	</div>
+	</div>
+	
+	
+</div>
+<div id="footer" class="container">
+	<p>Copyright (c) 2013 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FCT</a>. </p>
+</div>
+</body>
+</html>

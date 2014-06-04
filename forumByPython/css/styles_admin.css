@@ -1,0 +1,33 @@
+body {
+    background-color: #FFCCCC;    
+    font-family: Arial; 
+    width: 640px;  
+}
+p{
+    text-align:left;
+    font-weight: bold;
+    font-size:larger;
+    color: #A42903;   
+}
+h1,h2{
+    text-align: left;
+    font-style: italic;
+    color: #A42903;
+}
+
+#addforum,#addmoderator,#logout,#existingfurm{
+    width: 250px;
+    height: 40px;
+    font-size: larger;
+    text-align: center;
+    font-style: italic;
+}
+#buttom{
+    position:relative;
+    left: 470px;
+    top: 150px;
+}
+
+#forumname, #forum_description{
+    width: 300px;
+}

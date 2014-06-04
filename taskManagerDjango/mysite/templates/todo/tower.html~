@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Doubtless 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130428
+
+-->
+{% load staticfiles%}
+<input id="level" type="hidden" value = "{{tower.level}}"></input>
+<input id="towerlevel" type="hidden" value = "{{tower.towerlevel}}"></input>
+<input id="state" type="hidden" value="{{tower.state}}"></input>
+<script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
+<script type='text/javascript' src='{{STATIC_URL}}script.js'></script>
+<script type="text/javascript" src="{{STATIC_URL}}jquery.noty.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}layouts/center.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}layouts/bottom.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}themes/default.js"></script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Archivo+Narrow:400,700" rel="stylesheet" type="text/css">
+<link href="{%static "home.css"%}" rel="stylesheet" type="text/css" media="all" />
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body>
+<div id="logininfo">
+		{% if user.is_authenticated %}
+		<h2><p>Welcome, {{ user.username }}</p></h2>
+		{%endif%}
+		<form action="/logout/" method = "post">
+		{% csrf_token %}
+		<input type="submit" value="Logout"/>
+</form>
+</div>
+<div id="logo" class="container">
+	<h1><a>Task Manager</a></h1>
+</div>
+<div id="menu-wrapper">
+	<div id="menu" class="container">
+		<ul>
+			<li><a href="/home/">Home</a></li>
+			<li><a href="/task/">Tasks</a></li>
+			<li  class="current_page_item"><a href="/tower/">Tower</a></li>
+			<li><a href="/group/">Group</a></li>
+			<li><a href="/message/">Inbox</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="page" class="container">
+
+	<div id="box1">
+		<div style="clear: both;">&nbsp;</div>
+		<div class="entry">
+		This is where the tower is going to be.<br>
+
+		
+{%if tower.ap > 0 %}
+<form action="/tower/" method = "post" class = "do">
+{% csrf_token %}
+<input type="submit" value="Do something"/>
+{%else%}
+No points left!
+{%endif%}
+</form>
+		</div>
+	</div>
+	<div id="box2">
+<div id="chatbox">
+<h3>
+{%if tower.trigger = 1%}
+<script type = "text/javascript">
+Mercy();
+</script>
+{%elif tower.trigger = 2%}
+<script type="text/javascript">
+TowerUp();
+</script>
+{%elif tower.trigger = 3%}
+<script type="text/javascript">
+LevelUp();
+</script>
+{%endif%}
+</h3>
+<h2>
+{%if tower.state = 1%}
+<script>TowerState();</script>
+
+<img src="{%static "moneyEncounter.png"%}"></img>
+{%elif tower.state = 2%}
+<script>TowerState();</script>
+
+<img src="{%static "movement.png"%}"></img>
+{%elif tower.state = 3%}
+<script>TowerState();</script>
+
+{%if type = 1%}
+<img src="{%static "monster1.png"%}"></img>
+{%elif type = 2%}
+<img src="{%static "monster2.png"%}"></img>
+{%elif type = 3%}
+<img src="{%static "monster3.png"%}"></img>
+{%elif type = 4%}
+<img src="{%static "monster4.png"%}"></img>
+{%elif type = 5%}
+<img src="{%static "monster5.png"%}"></img>
+{%elif type = 6%}
+<img src="{%static "monster6.png"%}"></img>
+{%elif type = 7%}
+<img src="{%static "monster7.png"%}"></img>
+{%elif type = 8%}
+<img src="{%static "monster8.png"%}"></img>
+{%endif%}
+{%endif%}
+</h2>
+</div>
+	</div>
+	<div id="box3">
+		<h2>Action points: {{tower.ap}}<br>	Level: {{tower.level}}<br>	HP: {{tower.hp}}<br>		Money: {{tower.money}}<br>	Exp: {{tower.exp}}/{{expreq}}<br>	Tower Level: {{tower.towerlevel}}<br><br></h3>
+		<h3><ul class = style1><a href = "/shop/">Visit shop</a></ul></h3>
+	</div>
+</div>
+<div id="footer" class="container">
+	<p>Copyright (c) 2013 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FCT</a>. </p>
+</div>
+</body>
+</html>
