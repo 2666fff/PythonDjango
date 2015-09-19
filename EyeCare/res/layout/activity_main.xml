@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context=".MainActivity" >
+
+    
+    	<RelativeLayout
+    	    android:layout_marginBottom="5dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="今日一共使用手机: " />
+
+        <Chronometer
+            android:id="@+id/cmt_today_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Chronometer" />
+    </RelativeLayout>
+    
+	<RelativeLayout
+	    android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="已连续使用手机: " />
+
+        <Chronometer
+            android:id="@+id/cmt_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Chronometer" />
+    </RelativeLayout>
+    
+    
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="先设置提醒时间，每次屏幕解锁后，持续使用手机达到设置的时间时，将会响起闹钟，提醒护眼" 
+        android:layout_marginBottom="20dp"/>
+
+
+
+    
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="每次屏幕解锁后多少分钟进行护眼提醒？" />
+    
+    
+    <EditText
+        android:layout_marginTop="5dp"
+        android:id="@+id/et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="提醒分钟"
+        android:inputType="number" >
+    </EditText>
+    
+    <ToggleButton
+        android:layout_marginTop="5dp"
+        android:id="@+id/bt_setAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="定时提醒" />
+
+    <CheckBox
+        android:layout_marginTop="5dp"
+        android:id="@+id/cb_boot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="34dp"
+        android:text="开机启动此提醒设置" />
+    
+    
+
+</LinearLayout>
