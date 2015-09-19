@@ -1,0 +1,45 @@
+com.yang.g2048.BuildConfig
+com.yang.g2048.Const
+com.yang.g2048.InputListener:
+    private static final int SWIPE_MIN_DISTANCE
+    private static final int SWIPE_THRESHOLD_VELOCITY
+    private static final int MOVE_THRESHOLD
+    private static final int RESET_STARTING
+com.yang.g2048.MainActivity:
+    protected static final java.lang.String TAG
+    public static final java.lang.String WIDTH
+    public static final java.lang.String HEIGHT
+    public static final java.lang.String SCORE
+    public static final java.lang.String HIGH_SCORE
+    public static final java.lang.String UNDO_SCORE
+    public static final java.lang.String CAN_UNDO
+    public static final java.lang.String UNDO_GRID
+    public static final java.lang.String GAME_STATE
+    public static final java.lang.String UNDO_GAME_STATE
+com.yang.g2048.MainGame:
+    public static final int SPAWN_ANIMATION
+    public static final int MOVE_ANIMATION
+    public static final int MERGE_ANIMATION
+    public static final int FADE_GLOBAL_ANIMATION
+    public static final long MOVE_ANIMATION_TIME
+    public static final long SPAWN_ANIMATION_TIME
+    public static final long NOTIFICATION_ANIMATION_TIME
+    public static final long NOTIFICATION_DELAY_TIME
+    private static final java.lang.String HIGH_SCORE
+    public static final int startingMaxValue
+    public static final int GAME_WIN
+    public static final int GAME_LOST
+    public static final int GAME_NORMAL
+    public static final int GAME_NORMAL_WON
+    public static final int GAME_ENDLESS
+    public static final int GAME_ENDLESS_WON
+com.yang.g2048.MainView:
+    static final int BASE_ANIMATION_TIME
+    static final float MERGING_ACCELERATION
+    static final float INITIAL_VELOCITY
+com.yang.g2048.R
+com.yang.g2048.R$attr
+com.yang.g2048.R$color
+com.yang.g2048.R$dimen
+com.yang.g2048.R$drawable
+com.yang.g2048.R$string
